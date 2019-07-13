@@ -1,8 +1,20 @@
-import React from "react";
+import React, { Component } from "react";
+import WelcomeMessage from "./welcomeMessage";
+import styled from "styled-components";
 import "./App.css";
 
-function App() {
-  return <div>Hello World!</div>;
+const MyDiv = styled.div`
+  color: white;
+`;
+
+class App extends Component {
+  render() {
+    return (
+      <MyDiv>
+        <WelcomeMessage />
+      </MyDiv>
+    );
+  }
 }
 
 export default App;
