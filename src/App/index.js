@@ -1,18 +1,17 @@
 import React, { Component } from "react";
 import WelcomeMessage from "./welcomeMessage";
-import styled from "styled-components";
+// import styled from "styled-components";
+import AppLayout from "./AppLayout";
+import AppBar from "./AppBar";
 import "./App.css";
-
-const MyDiv = styled.div`
-  color: white;
-`;
 
 class App extends Component {
   render() {
     return (
-      <MyDiv>
+      <AppLayout>
+        <AppBar />
         <WelcomeMessage />
-      </MyDiv>
+      </AppLayout>
     );
   }
 }
