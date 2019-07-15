@@ -37,10 +37,11 @@ class AppProvider extends Component {
   fetchPrices = async () => {
     if (this.state.firstVisit) return;
     let prices = await this.prices();
-    // We must filter the empty price objects (not in the lecture)
+    // console.log(prices);
     prices = prices.filter(price => Object.keys(price).length);
-    console.log(prices);
+    // console.log(prices);
     this.setState({ prices });
+    console.log(prices);
   };
 
   prices = async () => {
@@ -49,8 +50,9 @@ class AppProvider extends Component {
       try {
         let priceData = await cc.priceFull(this.state.favorites[i], "USD");
         returnData.push(priceData);
+        // console.log("return data" + returnData);
       } catch (e) {
-        console.warn("Fetch Price Error: ", e);
+        console.log("Fetch Price Error: ", e);
       }
     }
     return returnData;
