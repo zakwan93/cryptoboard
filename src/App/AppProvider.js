@@ -71,7 +71,7 @@ class AppProvider extends Component {
     return { favorites };
   }
 
-  setFilteredCoins = filterCoins => this.setState({ filterCoins });
+  setFilteredCoins = filteredCoins => this.setState({ filteredCoins });
 
   render() {
     return (
