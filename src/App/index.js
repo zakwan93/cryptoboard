@@ -15,8 +15,8 @@ class App extends Component {
         <AppProvider>
           <AppBar />
           <Content>
-            <Settings />
             <DashBoard />
+            <Settings />
           </Content>
         </AppProvider>
       </AppLayout>
