@@ -1,8 +1,9 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { SelectableTile } from "../Shared/Tile";
-import { fontSize3, fontSizeBig } from "../Shared/Style";
+import { fontSize3, fontSizeBig, greenBoxShadow } from "../Shared/Style";
 import { CoinHeaderGridStyle } from "../Settings/CoinHeaderGrid";
+import { AppContext } from "../App/AppProvider";
 
 const numberFormat = number => {
   return +(number + "").slice(0, 7);
@@ -20,18 +21,6 @@ const JustifyLeft = styled.div`
   justify-self: left;
 `;
 
-const PriceTileStyled = styled(SelectableTile)`
-  ${props =>
-    props.compact &&
-    css`
-      ${fontSize3};
-      display: grid;
-      grid-gap: 5px;
-      justify-items: right;
-      grid-template-columns: repeat(3, 1fr);
-    `}
-`;
-
 function ChangePercentage({ data }) {
   return (
     <JustifyRight>
@@ -42,9 +31,12 @@ function ChangePercentage({ data }) {
   );
 }
 
-function PriceTile({ sym, data }) {
+function PriceTile({ sym, data, currentFavorites, setCurrentFavourite }) {
   return (
-    <PriceTileStyled>
+    <PriceTileStyled
+      onClick={setCurrentFavourite}
+      currentFavorites={currentFavorites}
+    >
       <CoinHeaderGridStyle>
         <div>{sym}</div>
         <ChangePercentage data={data} />
@@ -54,9 +46,18 @@ function PriceTile({ sym, data }) {
   );
 }
 
-function PriceTileCompact({ sym, data }) {
+function PriceTileCompact({
+  sym,
+  data,
+  currentFavorites,
+  setCurrentFavourite
+}) {
   return (
-    <PriceTileStyled compact>
+    <PriceTileStyled
+      compact
+      onClick={setCurrentFavourite}
+      currentFavorites={currentFavorites}
+    >
       <JustifyLeft>{sym}</JustifyLeft>
       <ChangePercentage data={data} />
       <div>{numberFormat(data.PRICE)}</div>
@@ -68,7 +69,18 @@ export default function({ price, index }) {
   let sym = Object.keys(price)[0];
   let data = price[sym]["USD"];
   let TileClass = index < 5 ? PriceTile : PriceTileCompact;
-  return <TileClass sym={sym} data={data} />;
+  return (
+    <AppContext.Consumer>
+      {({ currentFavorites, setCurrentFavourite }) => (
+        <TileClass
+          sym={sym}
+          data={data}
+          currentFavorites={currentFavorites === sym}
+          setCurrentFavourite={() => setCurrentFavourite(sym)}
+        />
+      )}
+    </AppContext.Consumer>
+  );
 }
 
 const ChangePCT = styled.div`
@@ -77,5 +89,24 @@ const ChangePCT = styled.div`
     props.red &&
     css`
       color: red;
+    `}
+`;
+
+const PriceTileStyled = styled(SelectableTile)`
+  ${props =>
+    props.compact &&
+    css`
+      ${fontSize3};
+      display: grid;
+      grid-gap: 5px;
+      justify-items: right;
+      grid-template-columns: repeat(3, 1fr);
+    `}
+
+  ${props =>
+    props.currentFavorites &&
+    css`
+      ${greenBoxShadow};
+      pointer-events: none;
     `}
 `;

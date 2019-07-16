@@ -15,10 +15,12 @@ class AppProvider extends Component {
       favorites: ["BTC", "ETH", "XMR", "DOGE"],
       ...this.savedSettings(),
       setPage: page => this.setState({ page }),
+      setFilteredCoins: filteredCoins => this.setState({ filteredCoins }),
       addCoin: this.addCoin,
       removeCoin: this.removeCoin,
       isInFavorites: this.isInFavorites,
-      setFilteredCoins: this.setFilteredCoins,
+      setCurrentFavourite: this.setCurrentFavourite,
+      // setFilteredCoins: this.setFilteredCoins,
       confirmFavorites: this.confirmFavorites
     };
   }
@@ -52,7 +54,7 @@ class AppProvider extends Component {
         returnData.push(priceData);
         // console.log("return data" + returnData);
       } catch (e) {
-        console.log("Fetch Price Error: ", e);
+        console.warn("Fetch Price Error: ", e);
       }
     }
     return returnData;
@@ -75,13 +77,29 @@ class AppProvider extends Component {
 
   confirmFavorites = () => {
     // console.log("Hello!");
-    this.setState({ firstVisit: false, page: "dashboard" }, () => {
-      this.fetchPrices();
-    });
+    let currentFavorites = this.state.favorites[0];
+    this.setState(
+      { firstVisit: false, page: "dashboard", currentFavorites },
+      () => {
+        this.fetchPrices();
+      }
+    );
     localStorage.setItem(
       "cryptoDash",
       JSON.stringify({
-        favorites: this.state.favorites
+        favorites: this.state.favorites,
+        currentFavorites
+      })
+    );
+  };
+
+  setCurrentFavourite = sym => {
+    this.setState({ currentFavorites: sym });
+    localStorage.setItem(
+      "cryptoDash",
+      JSON.stringify({
+        ...JSON.parse(localStorage.getItem("cryptoDash")),
+        currentFavorites: sym
       })
     );
   };
@@ -91,11 +109,9 @@ class AppProvider extends Component {
     if (!cryptoDashData) {
       return { page: "settings", firstVisit: true };
     }
-    let { favorites } = cryptoDashData;
-    return { favorites };
+    let { favorites, currentFavorites } = cryptoDashData;
+    return { favorites, currentFavorites };
   }
-
-  setFilteredCoins = filteredCoins => this.setState({ filteredCoins });
 
   render() {
     return (
