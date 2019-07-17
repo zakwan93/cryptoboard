@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/cryptoboard/static/css/main.f4e7ec4f.chunk.css",
+    "main.js": "/cryptoboard/static/js/main.450ef146.chunk.js",
+    "main.js.map": "/cryptoboard/static/js/main.450ef146.chunk.js.map",
+    "runtime~main.js": "/cryptoboard/static/js/runtime~main.117c916a.js",
+    "runtime~main.js.map": "/cryptoboard/static/js/runtime~main.117c916a.js.map",
+    "static/js/2.412f5393.chunk.js": "/cryptoboard/static/js/2.412f5393.chunk.js",
+    "static/js/2.412f5393.chunk.js.map": "/cryptoboard/static/js/2.412f5393.chunk.js.map",
+    "index.html": "/cryptoboard/index.html",
+    "precache-manifest.de4df20c843e017fe08a9eedeb0db824.js": "/cryptoboard/precache-manifest.de4df20c843e017fe08a9eedeb0db824.js",
+    "service-worker.js": "/cryptoboard/service-worker.js",
+    "static/css/main.f4e7ec4f.chunk.css.map": "/cryptoboard/static/css/main.f4e7ec4f.chunk.css.map"
+  }
+}
