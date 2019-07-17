@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e7870733148b37bcaab3a06f081a3c95",
+    "revision": "4b2c0bdc9cd5fc3a6f01932a91de4bf6",
     "url": "/cryptoboard/index.html"
   },
   {
