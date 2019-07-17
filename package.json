@@ -2,10 +2,12 @@
   "name": "cryptoboard",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://zakwan93.github.io/cryptoboard",
   "dependencies": {
     "babel-core": "^6.26.3",
     "cryptocompare": "^1.0.0",
     "fuzzy": "^0.1.3",
+    "gh-pages": "^2.0.1",
     "lodash": "^4.17.14",
     "moment": "^2.24.0",
     "react": "^16.8.6",
@@ -18,7 +20,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
